@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@+id/navigation_home">
+
+    <fragment
+            android:id="@+id/navigation_home"
+            android:name="com.leo.comic.ui.home.HomeFragment"
+            android:label="@string/title_home"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_home"/>
+
+    <fragment
+            android:id="@+id/navigation_history"
+            android:name="com.leo.comic.ui.history.HistoryFragment"
+            android:label="@string/title_history"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_history"/>
+
+    <fragment
+            android:id="@+id/navigation_local"
+            android:name="com.leo.comic.ui.local.LocalFragment"
+            android:label="@string/title_local"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_local"/>
+</navigation>
