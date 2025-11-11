@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -51,13 +52,27 @@ public class ComicMean extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String comicUrl = bundle.getString("comicOverallUrl");
+        String comicName = bundle.getString("comicName");
+        comicTitle.setText(comicName);
+        Toast.makeText(this, "打开了漫画: " + comicName, Toast.LENGTH_SHORT).show();
         extractComicOverall(mainHost + comicUrl);
     }
 
     // 初始化底部按钮
     private void initBottomButton() {
         continueReadingButton = findViewById(R.id.continue_reading_button);
+        // 适配深色模式
+        if (isDarkMode()) {
+            // 在深色模式下设置按钮背景和文字颜色
+            continueReadingButton.setBackgroundColor(getResources().getColor(R.color.button_background_dark));
+            continueReadingButton.setTextColor(getResources().getColor(R.color.button_text_dark));
+        }
         continueReadingButton.setOnClickListener(v -> onContinueReadingClick());
+    }
+    private boolean isDarkMode() {
+        int nightModeFlags = getResources().getConfiguration().uiMode &
+                android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES;
     }
     // 继续阅读按钮点击事件处理
     private void onContinueReadingClick() {
@@ -105,7 +120,7 @@ public class ComicMean extends AppCompatActivity {
     }
 
     private void drawComicMean(ComicMeanBean comicMean) {
-        comicTitle.setText(comicMean.getComicName());
+//        comicTitle.setText(comicMean.getComicName());
         comicIntro.setText(comicMean.getComicIntro());
         String coverUrl = comicMean.getComicCover();
         if (coverUrl != null && !coverUrl.isEmpty()) {
@@ -156,9 +171,10 @@ public class ComicMean extends AppCompatActivity {
     }
     private android.graphics.drawable.Drawable createBorderedBackground() {
         android.graphics.drawable.GradientDrawable drawable = new android.graphics.drawable.GradientDrawable();
-        drawable.setColor(android.graphics.Color.WHITE); // 背景颜色
-        drawable.setStroke(dpToPx(1), android.graphics.Color.GRAY); // 边框宽度和颜色
-        drawable.setCornerRadius(dpToPx(4)); // 可选：圆角
+        // 使用适配深色模式的颜色资源
+        drawable.setColor(getResources().getColor(R.color.chapter_item_background_light));
+        drawable.setStroke(dpToPx(1), getResources().getColor(R.color.chapter_item_border_light));
+        drawable.setCornerRadius(dpToPx(4));
         return drawable;
     }
 

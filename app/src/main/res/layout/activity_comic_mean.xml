@@ -158,8 +158,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:padding="16dp"
-            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:background="@color/bottom_button_area_background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">

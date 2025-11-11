@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        root.setBackgroundColor(getResources().getColor(R.color.page_background));
 
         addCategoryTabs();
         String firstTab = convertFindUrlToArray(findUrl)[0];
@@ -127,6 +128,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LinearLayout categoryContainer = binding.categoryContainer;
         categoryContainer.removeAllViews();
 
+        // 用于跟踪当前选中的tab
+        final TextView[] selectedTab = {null};
+
         for (String item : convertFindUrlToArray(findUrl)) {
             String[] parts = item.split("::");
             if (parts.length >= 1) {
@@ -134,17 +138,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 TextView tab = new TextView(getContext());
                 tab.setText(tabName);
                 tab.setPadding(dpToPx(12), dpToPx(8), dpToPx(12), dpToPx(8));
-//                tab.setMarginEnd(dpToPx(8));
                 tab.setBackgroundResource(R.drawable.tab_background);
                 tab.setTextColor(getResources().getColorStateList(R.color.tab_text_color));
                 tab.setClickable(true);
                 tab.setFocusable(true);
 
                 // 设置标签点击事件
-                tab.setOnClickListener(v -> onTabClick(tabName, parts.length > 1 ? parts[1] : ""));
+                tab.setOnClickListener(v -> {
+                    // 取消之前选中tab的选中状态
+                    if (selectedTab[0] != null) {
+                        selectedTab[0].setSelected(false);
+                    }
+                    // 设置当前tab为选中状态
+                    tab.setSelected(true);
+                    selectedTab[0] = tab;
+
+                    onTabClick(tabName, parts.length > 1 ? parts[1] : "");
+                });
 
                 categoryContainer.addView(tab);
             }
+        }
+
+        // 默认选中第一个tab
+        if (categoryContainer.getChildCount() > 0) {
+            TextView firstTab = (TextView) categoryContainer.getChildAt(0);
+            firstTab.setSelected(true);
+            selectedTab[0] = firstTab;
         }
     }
 
@@ -240,7 +260,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ImageView coverImage = new ImageView(getContext());
             coverImage.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(80), dpToPx(100)));
             coverImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            coverImage.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+            coverImage.setBackgroundColor(getResources().getColor(R.color.comic_item_background_light));
 
             // 使用 Glide 加载封面图片（如果有的话）
             if (comic.getComicCover() != null && !comic.getComicCover().isEmpty()) {
@@ -291,6 +311,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // 这里需要传递漫画的URL，但目前 ComicMeanBean 中没有存储URL的字段
                 // 可以考虑扩展 ComicMeanBean 或使用其他方式传递
                 intent.putExtra("comicOverallUrl", comic.getComicUrl());
+                intent.putExtra("comicName", comic.getComicName());
                 startActivity(intent);
             });
 
@@ -308,6 +329,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        intent.putExtra("comicContentUrl", "https://www.manmanapp.com/comic/detail-1565234.html");
         Intent intent = new Intent(getActivity(), ComicMean.class);
         intent.putExtra("comicOverallUrl", "https://www.manmanapp.com/comic-1405394.html");
+        intent.putExtra("comicName", "https://www.manmanapp.com/comic-1405394.html");
         startActivity(intent);
     }
 }

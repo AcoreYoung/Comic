@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="comic_item_background_light">#2D2D2D</color>
+    <color name="comic_item_background_dark">#1A1A1A</color>
+    <color name="chapter_item_background_light">#1A1A1A</color>
+    <color name="chapter_item_background_dark">#000000</color>
+    <color name="chapter_item_border_light">#666666</color>
+    <color name="chapter_item_border_dark">#444444</color>
+    <color name="button_background_light">#1976D2</color>
+    <color name="button_background_dark">#0D47A1</color>
+    <color name="button_text_light">#FFFFFF</color>
+    <color name="button_text_dark">#FFFFFF</color>
+    <color name="bottom_button_area_background_light">#121212</color>
+    <color name="bottom_button_area_background_dark">#121212</color>
+
+    <color name="page_background">#121212</color>
+    <color name="button_nav_background">#121213</color>
+    <color name="tab_text_color">#FFFFFF</color>
+</resources>
