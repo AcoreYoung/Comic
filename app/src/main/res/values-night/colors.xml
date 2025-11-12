@@ -14,6 +14,6 @@
     <color name="bottom_button_area_background_dark">#121212</color>
 
     <color name="page_background">#121212</color>
-    <color name="button_nav_background">#121213</color>
+    <color name="button_nav_background">#0f0f0f</color>
     <color name="tab_text_color">#FFFFFF</color>
 </resources>

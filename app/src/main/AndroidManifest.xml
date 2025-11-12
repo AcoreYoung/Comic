@@ -12,6 +12,9 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Comic">
         <activity
+                android:name=".ui.SourceManagementActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".ui.ComicMean"
                 android:exported="false"
                 android:theme="@style/Theme.Comic"/>
