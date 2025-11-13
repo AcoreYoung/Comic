@@ -22,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.leo.comic.databinding.ActivityMainBinding;
 //import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.leo.comic.ui.SourceManagementActivity;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
@@ -114,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
     private void handleSourceManagementClick() {
         // 实现图源管理功能
         Toast.makeText(this, "点击了图源管理", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SourceManagementActivity.class);
+        startActivity(intent);
     }
 
     @Override
